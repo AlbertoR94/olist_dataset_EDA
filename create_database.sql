@@ -1,18 +1,18 @@
 USE olist_data;
 
 CREATE TABLE customers (
-    id char(32) NOT NULL, 
-    unique_id char(32) NOT NULL,
-    zip_code_prefix char(5),
-    city varchar(32),
+    id char(50) NOT NULL, 
+    unique_id char(50) NOT NULL,
+    zip_code_prefix char(8),
+    city varchar(50),
     state char(2),
     PRIMARY KEY(id)
 );
 
 CREATE TABLE orders (
-    id char(32) NOT NULL, 
-    customer_id char(32),
-    order_state varchar(32),
+    id char(50) NOT NULL, 
+    customer_id char(50),
+    order_status varchar(50),
     purchase_timestamp datetime,
     approved_at datetime,
     delivered_carrier_date datetime,
@@ -23,7 +23,7 @@ CREATE TABLE orders (
 );
 
 CREATE TABLE products(
-    product_id char(32),
+    product_id char(50),
     product_category_name varchar(50),
     product_name_length smallint,
     product_desc_length smallint,
@@ -36,18 +36,18 @@ CREATE TABLE products(
 );
 
 CREATE TABLE sellers(
-    seller_id char(32),
-    seller_zipcode char(5),
+    seller_id char(50),
+    seller_zipcode char(8),
     seller_city varchar(50),
     seller_state char(2),
     PRIMARY KEY (seller_id)
 );
 
 CREATE TABLE order_items(
-    order_id char(32), 
+    order_id char(50), 
     order_item_id smallint,
-    product_id char(32),
-    seller_id char(32),
+    product_id char(50),
+    seller_id char(50),
     shipping_limit_date datetime,
     price float,
     freight_value float,
@@ -57,8 +57,8 @@ CREATE TABLE order_items(
 );
 
 CREATE TABLE order_reviews(
-    review_id char(32) NOT NULL, 
-    order_id char(32),
+    review_id char(50) NOT NULL, 
+    order_id char(50),
     score smallint,
     comment_title text,
     comment_message text,
@@ -69,7 +69,7 @@ CREATE TABLE order_reviews(
 );
 
 CREATE TABLE order_payments(
-    order_id char(32),
+    order_id char(50),
     payment_sequential smallint,
     payment_type text,
     payment_installment smallint,
@@ -83,7 +83,7 @@ CREATE TABLE category_name_translation(
 );
 
 CREATE TABLE geo_location(
-    zipcode char(5),
+    zipcode char(8),
     latitude double precision,
     longitude double precision,
     city varchar(50),
