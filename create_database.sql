@@ -1,6 +1,6 @@
 USE olist_data;
 
-/*CREATE TABLE customers (
+CREATE TABLE customers (
     id char(32) NOT NULL, 
     unique_id char(32) NOT NULL,
     zip_code_prefix char(5),
@@ -42,7 +42,6 @@ CREATE TABLE sellers(
     seller_state char(2),
     PRIMARY KEY (seller_id)
 );
-*/
 
 CREATE TABLE order_items(
     order_id char(32), 
@@ -83,7 +82,6 @@ CREATE TABLE category_name_translation(
     category_translation varchar(50)
 );
 
-/* Creating geolocation table */
 CREATE TABLE geo_location(
     zipcode char(5),
     latitude double precision,
