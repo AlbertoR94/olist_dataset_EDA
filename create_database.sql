@@ -5,12 +5,12 @@ CREATE TABLE customers (
     unique_id char(50) NOT NULL,
     zip_code_prefix char(8),
     city varchar(50),
-    state char(2),
+    state char(4),
     PRIMARY KEY(id)
 );
 
 CREATE TABLE orders (
-    id char(50) NOT NULL, 
+    order_id char(50) NOT NULL, 
     customer_id char(50),
     order_status varchar(50),
     purchase_timestamp datetime,
@@ -18,7 +18,7 @@ CREATE TABLE orders (
     delivered_carrier_date datetime,
     delivered_customer_date datetime,
     estimated_delivery_date datetime,
-    PRIMARY KEY (id),
+    PRIMARY KEY (order_id),
     FOREIGN KEY (customer_id) REFERENCES customers(id)
 );
 
@@ -39,7 +39,7 @@ CREATE TABLE sellers(
     seller_id char(50),
     seller_zipcode char(8),
     seller_city varchar(50),
-    seller_state char(2),
+    seller_state char(4),
     PRIMARY KEY (seller_id)
 );
 
@@ -51,7 +51,7 @@ CREATE TABLE order_items(
     shipping_limit_date datetime,
     price float,
     freight_value float,
-    FOREIGN KEY (order_id) REFERENCES orders(id),
+    FOREIGN KEY (order_id) REFERENCES orders(order_id),
     FOREIGN KEY (product_id) REFERENCES products(product_id),
     FOREIGN KEY (seller_id) REFERENCES sellers(seller_id)
 );
@@ -64,8 +64,7 @@ CREATE TABLE order_reviews(
     comment_message text,
     creation_date datetime,
     answer_timestamp datetime,
-    PRIMARY KEY (review_id),
-    FOREIGN KEY (order_id) REFERENCES orders(id)
+    FOREIGN KEY (order_id) REFERENCES orders(order_id)
 );
 
 CREATE TABLE order_payments(
@@ -74,7 +73,7 @@ CREATE TABLE order_payments(
     payment_type text,
     payment_installment smallint,
     payment_value float,
-    FOREIGN KEY (order_id) REFERENCES orders(id)
+    FOREIGN KEY (order_id) REFERENCES orders(order_id)
 );
 
 CREATE TABLE category_name_translation(
@@ -87,5 +86,5 @@ CREATE TABLE geo_location(
     latitude double precision,
     longitude double precision,
     city varchar(50),
-    geostate char(2) 
+    geostate char(4) 
     );
